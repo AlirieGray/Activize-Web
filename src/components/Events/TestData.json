@@ -1,0 +1,18 @@
+{
+  "events": [
+    {
+      "name": "Free the Nipple Rally",
+      "date": "12/05/2017",
+      "lat": "37.7749",
+      "lng": "-122.4194",
+      "address": "San Francisco"
+    },
+    {
+      "name": "Fuck Trump",
+      "date": "1/20/2018",
+      "lat": "37.7749",
+      "lng": "-122.4194",
+      "address": "San Francisco"
+    }
+  ]
+}
