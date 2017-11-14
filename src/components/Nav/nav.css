@@ -13,6 +13,12 @@
   flex-direction: row;
 }
 
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
 a {
   text-decoration: none;
 }
@@ -21,14 +27,25 @@ a {
   text-decoration: none;
   color: rgba(255, 255, 255, .8);
   margin: 10px;
+  font-size: 14px;
 }
 
 .links > a:active {
   color: white !important;
 }
 
-.links > a:hover {
+.links > button {
+  background-color: inherit;
+  border-width: 0px;
+  color: rgba(255, 255, 255, .8);
+  font-size: 14px;
+  padding: 0px !important;
+  margin: 10px;
+}
+
+.links > a:hover, button:hover, button:focus {
   color: white !important;
+  outline: 0 !important;
 }
 
 h1 {

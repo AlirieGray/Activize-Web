@@ -7,13 +7,20 @@ class Nav extends Component {
       <div>
         <header>
           <div className='nav-container'>
-            <a href="/">
-              <h1> Activize </h1>
-            </a>
-            <div className='links'>
-              <a href="/events"> Events </a>
-              <a href="/about"> About </a>
+
+            <div className="left">
+              <a style={{marginRight:10}} href="/"> <h1> Activize </h1> </a>
+              <div className="links">
+                <a href="/events"> Events </a>
+                <a href="/about"> About </a>
+              </div>
             </div>
+
+            <div className='links' style={{paddingTop:10}}>
+              <button> Login </button>
+              <button> Sign Up </button>
+            </div>
+
           </div>
         </header>
       </div>

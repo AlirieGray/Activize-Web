@@ -2,3 +2,7 @@
   display: flex;
   flex-direction: column;
 }
+
+.pContainer {
+  max-width: 500px;
+}
