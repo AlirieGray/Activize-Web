@@ -6,7 +6,7 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav setLoggedIn = {this.setLoggedIn} loggedIn = {this.props.loggedIn} />
         <div className="container" style={{"align-items":"center"}}>
           <div className="pContainer">
             <h2> For Organizers </h2>

@@ -51,3 +51,14 @@ a {
 h1 {
   color: white;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
