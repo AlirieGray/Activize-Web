@@ -24,9 +24,9 @@ class Events extends Component {
     return (
       <div>
         <Nav setLoggedIn = {this.setLoggedIn} loggedIn = {this.props.loggedIn}/>
-        <a className="newEventLink" href="/new-event">
+        {/*<a className="newEventLink" href="/new-event">
           + Create Event
-        </a>
+        </a>*/}
         <div className="eventsContainer">
           {this.getEvents()}
         </div>

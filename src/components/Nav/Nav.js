@@ -46,6 +46,20 @@ class Nav extends Component {
   }
 
   render() {
+
+    let loginLogout = null;
+    let signUpOrNewEvent = null;
+    let newEventLink = null;
+    // if logged in
+    if (this.props.loggedIn) {
+      loginLogout = <button onClick={this.logout}> Logout </button>
+      signUpOrNewEvent = <a href="/new-event"> Create Event </a>
+    // if not logged in
+    } else {
+      loginLogout = <button onClick={this.toggleLogin}> Login </button>
+      signUpOrNewEvent = <button onClick={this.toggleSignUp}> Sign Up </button>
+    }
+
     return (
       <div>
         <header>
@@ -53,13 +67,13 @@ class Nav extends Component {
             <div className="left">
               <a style={{marginRight:10}} href="/"> <h1> Activize </h1> </a>
               <div className="links">
-                <a href="/events"> Events </a>
                 <a href="/about"> About </a>
+                <a href="/events"> Events </a>
               </div>
             </div>
             <div className='links' style={{paddingTop:10}}>
-              <button onClick={this.toggleLogin}> Login </button>
-              <button onClick={this.toggleSignUp}> Sign Up </button>
+              {signUpOrNewEvent}
+              {loginLogout}
             </div>
           </div>
         </header>
