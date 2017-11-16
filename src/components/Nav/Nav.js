@@ -18,6 +18,8 @@ class Nav extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
   }
 
   toggleLogin() {
@@ -34,12 +36,23 @@ class Nav extends Component {
     })
   }
 
+  updateUsername(e) {
+    const text = e.target.value;
+    this.setState({ username: text });
+    console.log(this.state.username)
+  }
+
+  updatePassword(e) {
+    const text = e.target.value;
+    this.setState({ password: text });
+  }
+
   login(e) {
     e.preventDefault();
     console.log("Calling log in");
     var pass = this.state.password;
     var user = this.state.username;
-    if (pass && user) {
+    if (pass != "" && user != "") {
       var jsonData = {
         username: this.state.username,
         password: this.state.password
@@ -69,6 +82,7 @@ class Nav extends Component {
 
   logout(e) {
     console.log("Calling log out");
+    this.props.setLoggedIn(false, "");
   }
 
   signUp(e) {
@@ -76,7 +90,7 @@ class Nav extends Component {
     console.log("Calling sign up");
     var pass = this.state.password;
     var user = this.state.username;
-    if (pass && user) {
+    if (pass != "" && user != "") {
       var jsonData = {
         username: user,
         password: pass
@@ -97,7 +111,6 @@ class Nav extends Component {
         warningMessage: "You must provide a username and password"
       })
     }
-
   }
 
   render() {
@@ -142,13 +155,9 @@ class Nav extends Component {
           <div>
             <form>
               <label htmlFor="username"> Username </label>
-              <input name="username" type="text" onChange={(e, newValue) => {
-                this.setState({username: newValue})
-              }}/>
+              <input name="username" type="text" value={this.state.username} onChange={this.updateUsername} />
               <label htmlFor="password"> Password </label>
-              <input name="password" type="password" onChange={(e, newValue) => {
-                this.setState({password: newValue})
-              }}/>
+              <input name="password" type="password" value={this.state.password} onChange={this.updatePassword}/>
               <p> {this.state.warningMessage} </p>
               <div className="modalFooter">
                 <button onClick={this.toggleLogin}> Cancel </button>
@@ -168,13 +177,9 @@ class Nav extends Component {
           <div>
             <form>
               <label htmlFor="username"> Username </label>
-              <input name="username" type="text" onChange={(e, newValue) => {
-                this.setState({username: newValue})
-              }}/>
+              <input name="username" type="text" value={this.state.username} onChange={this.updateUsername}/>
               <label htmlFor="password"> Password </label>
-              <input name="password" type="password" onChange={(e, newValue) => {
-                this.setState({password: newValue})
-              }}/>
+              <input name="password" type="password" value={this.state.password} onChange={this.updatePassword}/>
               <p> {this.state.warningMessage} </p>
               <div className="modalFooter">
                 <button onClick={this.toggleSignUp}> Cancel </button>

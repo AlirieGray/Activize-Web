@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Nav from '../Nav/Nav';
 import './events.css';
 const TestData = require('./TestData.json');
 
