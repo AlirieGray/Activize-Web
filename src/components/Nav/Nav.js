@@ -8,7 +8,9 @@ class Nav extends Component {
     super(props);
     this.state = {
       loginModalOpen: false,
-      signUpModalOpen: false
+      signUpModalOpen: false,
+      username: "",
+      password: ""
     };
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleSignUp = this.toggleSignUp.bind(this);
@@ -31,11 +33,19 @@ class Nav extends Component {
 
   login() {
     console.log("Calling log in");
+    var jsonData = {
+      username: this.state.username,
+      password: this.state.password
+    }
     // make fetch request to the server (POST to /login)
-    fetch('http://localhost:3000/login', { method: 'POST' }).then((res) => {
+    fetch('http://localhost:8000/login', { method: 'POST', body: jsonData }).then((res) => {
       return res.json();
     }).then((json) => {
-      console.log(json.status)
+      console.log(json);
+      console.log(json.status);
+      if (json.status == 200) {
+        this.props.setLoggedIn(true, json.token);
+      }
     })
     // get  response
     // set logged in state (200 = logged in)
@@ -49,12 +59,19 @@ class Nav extends Component {
 
   signUp() {
     console.log("Calling sign up");
+    var jsonData = {
+      username: this.state.username,
+      password: this.state.password
+    }
     // make fetch request to the server (POST to /sign-up)
-    fetch('http://localhost:3000/sign-up', { method: 'POST' }).then((res) => {
+    fetch('http://localhost:8000/sign-up', { method: 'POST', body: jsonData }).then((res) => {
       return res.json();
     }).then((json) => {
-      console.log(json)
+      console.log(json);
       console.log(json.status)
+      if (json.status == 200) {
+        this.props.setLoggedIn(true, json.token);
+      }
     })
   }
 
@@ -100,9 +117,13 @@ class Nav extends Component {
           <div>
             <form>
               <label htmlFor="username"> Username </label>
-              <input name="username" type="text"/>
+              <input name="username" type="text" onChange = {(e, newValue) => {
+                this.setState({username: newValue})
+              }}/>
               <label htmlFor="password"> Password </label>
-              <input name="password" type="password"/>
+              <input name="password" type="password" onChange={(e, newValue) => {
+                this.setState({password: newValue})
+              }}/>
               <div className="modalFooter">
                 <button onClick={this.toggleLogin}> Cancel </button>
                 <button onClick={this.login}> Log In </button>
@@ -118,10 +139,14 @@ class Nav extends Component {
           >
           <div>
             <form>
-              <label htmlFor="username"> Username </label>
-              <input name="username" type="text"/>
-              <label htmlFor="password"> Password </label>
-              <input name="password" type="password"/>
+            <label htmlFor="username"> Username </label>
+            <input name="username" type="text" onChange = {(e, newValue) => {
+              this.setState({username: newValue})
+            }}/>
+            <label htmlFor="password"> Password </label>
+            <input name="password" type="password" onChange={(e, newValue) => {
+              this.setState({password: newValue})
+            }}/>
               <div className="modalFooter">
                 <button onClick={this.toggleSignUp}> Cancel </button>
                 <button onClick={this.signUp}> Sign Up </button>

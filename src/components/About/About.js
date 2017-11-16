@@ -7,7 +7,7 @@ class About extends Component {
     return (
       <div>
         <Nav setLoggedIn = {this.setLoggedIn} loggedIn = {this.props.loggedIn} />
-        <div className="container" style={{"align-items":"center"}}>
+        <div className="container" style={{"alignItems":"center"}}>
           <div className="pContainer">
             <h2> For Organizers </h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.

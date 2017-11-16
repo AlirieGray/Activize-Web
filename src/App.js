@@ -15,7 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      token:""
+      token: ""
     }
     this.setLoggedIn = this.setLoggedIn.bind(this)
   }

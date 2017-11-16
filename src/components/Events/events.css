@@ -8,6 +8,7 @@
 
 .eventCard {
   margin: 5px;
+  padding: 10px;
   width: 50%;
   max-width: 500px !important;
   border-color: black;
