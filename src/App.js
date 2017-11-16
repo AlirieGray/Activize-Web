@@ -14,15 +14,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      token:""
     }
     this.setLoggedIn = this.setLoggedIn.bind(this)
   }
 
-  setLoggedIn(isLoggedIn) {
+  setLoggedIn(isLoggedIn, token) {
     console.log("set logged in running")
     this.setState({
       loggedIn: isLoggedIn
+      // also store token received from server
     })
   }
 

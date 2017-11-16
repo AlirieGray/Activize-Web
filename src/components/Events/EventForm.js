@@ -21,11 +21,11 @@ class EventForm extends Component {
         <Nav />
         <div>
           <form className="formContainer">
-            <label for="name"> Name </label>
+            <label htmlFor="name"> Name </label>
             <input name="name" />
-            <label for="name"> Date </label>
+            <label htmlFor="name"> Date </label>
             <input name="date" />
-            <label for="name"> Location </label>
+            <label htmlFor="name"> Location </label>
             <input name="location" />
           </form>
         </div>

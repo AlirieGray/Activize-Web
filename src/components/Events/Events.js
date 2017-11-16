@@ -15,8 +15,8 @@ class Events extends Component {
   }
 
   getEvents() {
-    return TestData.events.map((event) => {
-      return <EventCard name={event.name} date={event.date} address={event.address}/>
+    return TestData.events.map((event, index) => {
+      return <EventCard key={index} name={event.name} date={event.date} address={event.address}/>
     })
   }
 

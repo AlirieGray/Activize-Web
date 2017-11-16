@@ -31,8 +31,14 @@ class Nav extends Component {
 
   login() {
     console.log("Calling log in");
-    // get  200 response
-    // set logged in state
+    // make fetch request to the server (POST to /login)
+    fetch('http://localhost:3000/login', { method: 'POST' }).then((res) => {
+      return res.json();
+    }).then((json) => {
+      console.log(json.status)
+    })
+    // get  response
+    // set logged in state (200 = logged in)
     // **store token** for other requests to server
     // cookie if web or app state, async storage w/ react native
   }
@@ -43,6 +49,13 @@ class Nav extends Component {
 
   signUp() {
     console.log("Calling sign up");
+    // make fetch request to the server (POST to /sign-up)
+    fetch('http://localhost:3000/sign-up', { method: 'POST' }).then((res) => {
+      return res.json();
+    }).then((json) => {
+      console.log(json)
+      console.log(json.status)
+    })
   }
 
   render() {
@@ -86,9 +99,9 @@ class Nav extends Component {
           >
           <div>
             <form>
-              <label for="username"> Username </label>
+              <label htmlFor="username"> Username </label>
               <input name="username" type="text"/>
-              <label for="password"> Password </label>
+              <label htmlFor="password"> Password </label>
               <input name="password" type="password"/>
               <div className="modalFooter">
                 <button onClick={this.toggleLogin}> Cancel </button>
@@ -105,9 +118,9 @@ class Nav extends Component {
           >
           <div>
             <form>
-              <label for="username"> Username </label>
+              <label htmlFor="username"> Username </label>
               <input name="username" type="text"/>
-              <label for="password"> Password </label>
+              <label htmlFor="password"> Password </label>
               <input name="password" type="password"/>
               <div className="modalFooter">
                 <button onClick={this.toggleSignUp}> Cancel </button>
