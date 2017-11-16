@@ -10,7 +10,8 @@ class Nav extends Component {
       loginModalOpen: false,
       signUpModalOpen: false,
       username: "",
-      password: ""
+      password: "",
+      warningMessage: ""
     };
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleSignUp = this.toggleSignUp.bind(this);
@@ -21,58 +22,82 @@ class Nav extends Component {
 
   toggleLogin() {
     this.setState({
-      loginModalOpen: !this.state.loginModalOpen
+      loginModalOpen: !this.state.loginModalOpen,
+      warningMessage: ""
     });
   }
 
   toggleSignUp() {
     this.setState({
-      signUpModalOpen: !this.state.signUpModalOpen
+      signUpModalOpen: !this.state.signUpModalOpen,
+      warningMessage: ""
     })
   }
 
-  login() {
+  login(e) {
+    e.preventDefault();
     console.log("Calling log in");
-    var jsonData = {
-      username: this.state.username,
-      password: this.state.password
-    }
-    // make fetch request to the server (POST to /login)
-    fetch('http://localhost:8000/login', { method: 'POST', body: jsonData }).then((res) => {
-      return res.json();
-    }).then((json) => {
-      console.log(json);
-      console.log(json.status);
-      if (json.status == 200) {
-        this.props.setLoggedIn(true, json.token);
+    var pass = this.state.password;
+    var user = this.state.username;
+    if (pass && user) {
+      var jsonData = {
+        username: this.state.username,
+        password: this.state.password
       }
-    })
-    // get  response
-    // set logged in state (200 = logged in)
-    // **store token** for other requests to server
-    // cookie if web or app state, async storage w/ react native
+      // make fetch request to the server (POST to /login)
+      fetch('http://localhost:8000/login', { method: 'POST', body: jsonData }).then((res) => {
+        return res.json();
+      }).then((json) => {
+        console.log(json);
+        console.log(json.status);
+        if (json.status == 200) {
+          this.props.setLoggedIn(true, json.token);
+        }
+        this.toggleLogin();
+      })
+      // get  response
+      // set logged in state (200 = logged in)
+      // **store token** for other requests to server
+      // cookie if web or app state, async storage w/ react native
+    } else {
+      this.setState({
+        warningMessage: "You must provide a username and password"
+      })
+    }
+
   }
 
-  logout() {
+  logout(e) {
     console.log("Calling log out");
   }
 
-  signUp() {
+  signUp(e) {
+    e.preventDefault();
     console.log("Calling sign up");
-    var jsonData = {
-      username: this.state.username,
-      password: this.state.password
-    }
-    // make fetch request to the server (POST to /sign-up)
-    fetch('http://localhost:8000/sign-up', { method: 'POST', body: jsonData }).then((res) => {
-      return res.json();
-    }).then((json) => {
-      console.log(json);
-      console.log(json.status)
-      if (json.status == 200) {
-        this.props.setLoggedIn(true, json.token);
+    var pass = this.state.password;
+    var user = this.state.username;
+    if (pass && user) {
+      var jsonData = {
+        username: user,
+        password: pass
       }
-    })
+      // make fetch request to the server (POST to /sign-up)
+      fetch('http://localhost:8000/sign-up', { method: 'POST', body: jsonData }).then((res) => {
+        return res.json();
+      }).then((json) => {
+        console.log(json);
+        console.log(json.status)
+        if (json.status == 200) {
+          this.props.setLoggedIn(true, json.token);
+        }
+        this.toggleSignUp();
+      })
+    } else {
+      this.setState({
+        warningMessage: "You must provide a username and password"
+      })
+    }
+
   }
 
   render() {
@@ -117,16 +142,19 @@ class Nav extends Component {
           <div>
             <form>
               <label htmlFor="username"> Username </label>
-              <input name="username" type="text" onChange = {(e, newValue) => {
+              <input name="username" type="text" onChange={(e, newValue) => {
                 this.setState({username: newValue})
               }}/>
               <label htmlFor="password"> Password </label>
               <input name="password" type="password" onChange={(e, newValue) => {
                 this.setState({password: newValue})
               }}/>
+              <p> {this.state.warningMessage} </p>
               <div className="modalFooter">
                 <button onClick={this.toggleLogin}> Cancel </button>
-                <button onClick={this.login}> Log In </button>
+                <button onClick={(event) => {
+                  this.login(event);
+                }}> Log In </button>
               </div>
             </form>
           </div>
@@ -139,17 +167,20 @@ class Nav extends Component {
           >
           <div>
             <form>
-            <label htmlFor="username"> Username </label>
-            <input name="username" type="text" onChange = {(e, newValue) => {
-              this.setState({username: newValue})
-            }}/>
-            <label htmlFor="password"> Password </label>
-            <input name="password" type="password" onChange={(e, newValue) => {
-              this.setState({password: newValue})
-            }}/>
+              <label htmlFor="username"> Username </label>
+              <input name="username" type="text" onChange={(e, newValue) => {
+                this.setState({username: newValue})
+              }}/>
+              <label htmlFor="password"> Password </label>
+              <input name="password" type="password" onChange={(e, newValue) => {
+                this.setState({password: newValue})
+              }}/>
+              <p> {this.state.warningMessage} </p>
               <div className="modalFooter">
                 <button onClick={this.toggleSignUp}> Cancel </button>
-                <button onClick={this.signUp}> Sign Up </button>
+                <button onClick={(event) => {
+                  this.signUp(event);
+                }}> Sign Up </button>
               </div>
             </form>
           </div>
@@ -167,7 +198,9 @@ const modalStyle = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    width                 : '40%',
+    maxWidth             : '400px'
   }
 };
 

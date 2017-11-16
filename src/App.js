@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Redirect } from 'react-router';
 import {
   BrowserRouter as Router,
   Route
@@ -39,7 +40,11 @@ class App extends Component {
     }
 
     const RenderNewEvent = (props) => {
-      return <EventForm setLoggedIn = {this.setLoggedIn} loggedIn = {this.state.loggedIn} newEent={true} {...props} />
+      if (this.state.loggedIn) {
+        return <EventForm setLoggedIn = {this.setLoggedIn} loggedIn = {this.state.loggedIn} newEent={true} {...props} />
+      } else {
+        return <Redirect to={{pathname:'/'}} />
+      }
     }
 
     const RenderEvents = (props) => {

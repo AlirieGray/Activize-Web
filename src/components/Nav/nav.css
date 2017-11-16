@@ -57,8 +57,16 @@ form {
   flex-direction: column;
 }
 
+input {
+  padding: 6px;
+}
+
 .modalFooter {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.modalFooter > button {
+  margin: 5px;
 }
