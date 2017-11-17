@@ -39,7 +39,6 @@ class Nav extends Component {
   updateUsername(e) {
     const text = e.target.value;
     this.setState({ username: text });
-    console.log(this.state.username)
   }
 
   updatePassword(e) {
@@ -52,7 +51,8 @@ class Nav extends Component {
     console.log("Calling log in");
     var pass = this.state.password;
     var user = this.state.username;
-    if (pass != "" && user != "") {
+    console.log(this.state.username);
+    if (pass !== "" && user !== "") {
       var jsonData = {
         username: this.state.username,
         password: this.state.password
@@ -90,7 +90,7 @@ class Nav extends Component {
     console.log("Calling sign up");
     var pass = this.state.password;
     var user = this.state.username;
-    if (pass != "" && user != "") {
+    if (pass !== "" && user !== "") {
       var jsonData = {
         username: user,
         password: pass

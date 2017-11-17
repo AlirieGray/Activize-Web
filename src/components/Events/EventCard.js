@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './events.css';
-const TestData = require('./TestData.json');
 
 class EventCard extends Component {
 
