@@ -23,7 +23,7 @@ class Events extends Component {
   render() {
     return (
       <div>
-        <Nav setLoggedIn = {this.setLoggedIn} loggedIn = {this.props.loggedIn}/>
+        <Nav setLoggedIn = {this.props.setLoggedIn} loggedIn = {this.props.loggedIn}/>
         {/*<a className="newEventLink" href="/new-event">
           + Create Event
         </a>*/}

@@ -6,7 +6,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Nav setLoggedIn = {this.setLoggedIn} loggedIn = {this.props.loggedIn}/>
+        <Nav setLoggedIn = {this.props.setLoggedIn} loggedIn = {this.props.loggedIn}/>
       </div>
     );
   }

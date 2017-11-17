@@ -58,15 +58,28 @@ class Nav extends Component {
         password: this.state.password
       }
       // make fetch request to the server (POST to /login)
-      fetch('http://localhost:8000/login', { method: 'POST', body: jsonData }).then((res) => {
-        return res.json();
+      fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+      }).then((res) => {
+        console.log(res.status);
+        if (res.status == 200) {
+          return res.json();
+        }
+        else {
+          throw Error("Login failed");
+        }
       }).then((json) => {
         console.log(json);
         console.log(json.status);
-        if (json.status == 200) {
-          this.props.setLoggedIn(true, json.token);
-        }
+        this.props.setLoggedIn(true, json.token);
         this.toggleLogin();
+      }).catch((err) => {
+          console.log(err);
       })
       // get  response
       // set logged in state (200 = logged in)
@@ -96,7 +109,14 @@ class Nav extends Component {
         password: pass
       }
       // make fetch request to the server (POST to /sign-up)
-      fetch('http://localhost:8000/sign-up', { method: 'POST', body: jsonData }).then((res) => {
+      fetch('http://localhost:8000/sign-up', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+      }).then((res) => {
         return res.json();
       }).then((json) => {
         console.log(json);
