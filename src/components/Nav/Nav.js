@@ -75,7 +75,7 @@ class Nav extends Component {
         }
       }).then((json) => {
         console.log(json);
-        this.props.setLoggedIn(true, json.token);
+        localStorage.setItem('user_token', json.token);
         this.toggleLogin();
       }).catch((err) => {
           console.log(err);

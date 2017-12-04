@@ -10,14 +10,12 @@ class EventList extends Component {
   }
 
   render() {
-    console.log(this.props.events[0])
+    console.log(this.props.events[0]);
     return(
-      <div>
-        <div>
-          {this.props.events.map(({name, date, address}, index) => {
-            return (<EventCard key={index} name={name} date={date} address={address} />);
-          })}
-        </div>
+      <div className="eventsContainer">
+        {this.props.events.map(({name, date, address}, index) => {
+          return (<EventCard key={index} name={name} date={date} address={address} />);
+        })}
       </div>
     );
   }
