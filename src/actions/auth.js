@@ -31,6 +31,33 @@ export const receiveLogout = () => ({
   isAuthenticated: false
 })
 
+export function loginUser(creds) {
+
+  let config = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+    body: `username=${creds.username}&password=${creds.password}`
+  }
+
+  return dispatch => {
+    dispatch(requestLogin(creds));
+
+    return fetch('http://localhost:8000/login', config)
+      .then(response =>
+        response.json().then({user, res}) => {
+          if (res.status != 200) {
+            dispatch(loginError(res.message));
+            return Promise.reject(user);
+          } else {
+            localStorage.setItem('id_token', user.id);
+            localStorage.setItem('access_token', user.token);
+
+            dispatch(receiveLogin(user));
+          }
+        }).catch(err => console.error("Error: ", err));
+  }
+}
+
 export function logoutUser () {
     return dispatch => {
       dispatch(requestLogout());
