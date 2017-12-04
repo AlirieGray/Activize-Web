@@ -7,25 +7,16 @@ import './events.css';
 class EventList extends Component {
   constructor(props) {
     super(props);
-    this.getEvents = this.getEvents.bind(this);
-  }
-
-  getEvents(events) {
-    events.map((event, index) => {
-      console.log('running')
-      console.log(event.name)
-      return <p> event.name </p>
-      //return <EventCard key={index} name={event.name} date={event.date} address={event.address} />
-    })
   }
 
   render() {
     console.log(this.props.events[0])
     return(
       <div>
-        Events
         <div>
-          {this.getEvents(this.props.events)}
+          {this.props.events.map(({name, date, address}, index) => {
+            return (<EventCard key={index} name={name} date={date} address={address} />);
+          })}
         </div>
       </div>
     );

@@ -20,10 +20,9 @@ import './events.css';
 
 const EventCard = ({name, date, address}) => (
   <div className="eventCard">
-    <p> Here it is </p>
-    <h2> {this.props.name} </h2>
-    <p> {this.props.date} </p>
-    <p> {this.props.address} </p>
+    <h2> {name} </h2>
+    <p> {date} </p>
+    <p> {address} </p>
   </div>
 );
 
