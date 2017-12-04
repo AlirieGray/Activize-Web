@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import Nav from '../Nav/Nav'
 
 
 class About extends Component {
   render() {
     return (
       <div>
-        <Nav setLoggedIn = {this.setLoggedIn} loggedIn = {this.props.loggedIn} />
         <div className="container" style={{"alignItems":"center"}}>
           <div className="pContainer">
             <h2> For Organizers </h2>
