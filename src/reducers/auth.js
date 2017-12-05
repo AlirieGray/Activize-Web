@@ -4,10 +4,11 @@
 // The starting state sets authentication based on a token
 // in local storage.
 // TODO: check if token is expired
+
 export default (state = {
   isFetching: false,
   isAuthenticated: localStorage.getItem('id_token') ? true: false
-}, action) {
+  }, action) {
   switch(action.type) {
     case 'LOGIN_REQUEST':
       return {

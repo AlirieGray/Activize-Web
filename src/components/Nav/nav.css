@@ -45,6 +45,7 @@ a {
 
 .links > a:hover, button:hover, button:focus {
   color: white !important;
+  font-weight: bold;
   outline: 0 !important;
 }
 

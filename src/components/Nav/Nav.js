@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import {loginUser, logoutUser} from '../../actions/auth';
+import { connect } from 'react-redux';
 import './nav.css';
 
+// in progress: new method w/ no Modal for now
 class Nav extends Component {
+  render() {
+    const { dispatch, isAuthenticated, errorMessage } = this.props;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loginModalOpen: false,
-      signUpModalOpen: false,
-      username: "",
-      password: "",
-      warningMessage: ""
-    };
-    this.toggleLogin = this.toggleLogin.bind(this);
-    this.toggleSignUp = this.toggleSignUp.bind(this);
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.signUp = this.signUp.bind(this);
-    this.updateUsername = this.updateUsername.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
+    return (
+      <div>
+      <header>
+        <div className='nav-container'>
+          <div className="left">
+            <a style={{marginRight:10}} href="/"> <h1> Activize </h1> </a>
+            <div className="links">
+              <a href="/about"> About </a>
+              <a href="/events"> Events </a>
+            </div>
+          </div>
+          <div className='links' style={{paddingTop:10}}>
+            {!isAuthenticated && <a href="/login"> Log In </a>}
+            {!isAuthenticated && <a href="/signup"> Sign Up </a>}
+            {isAuthenticated && <button> Create Event </button>}
+            {isAuthenticated && <button> Logout </button>}
+          </div>
+        </div>
+      </header>
+      </div>
+    );
+
   }
+}
+
+/*
+class Nav extends Component {
 
   toggleLogin() {
     this.setState({
@@ -36,64 +51,9 @@ class Nav extends Component {
     })
   }
 
-  updateUsername(e) {
-    const text = e.target.value;
-    this.setState({ username: text });
-  }
-
-  updatePassword(e) {
-    const text = e.target.value;
-    this.setState({ password: text });
-  }
-
-  login(e) {
-    e.preventDefault();
-    console.log("Calling log in");
-    var pass = this.state.password;
-    var user = this.state.username;
-    console.log(this.state.username);
-    if (pass !== "" && user !== "") {
-      var jsonData = {
-        username: this.state.username,
-        password: this.state.password
-      }
-      // make fetch request to the server (POST to /login)
-      fetch('http://localhost:8000/login', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jsonData)
-      }).then((res) => {
-        console.log(res.status);
-        if (res.status == 200) {
-          return res.json();
-        }
-        else {
-          throw Error("Login failed");
-        }
-      }).then((json) => {
-        console.log(json);
-        localStorage.setItem('user_token', json.token);
-        this.toggleLogin();
-      }).catch((err) => {
-          console.log(err);
-      })
-      // get  response
-      // set logged in state (200 = logged in)
-      // **store token** for other requests to server
-      // cookie if web or app state, async storage w/ react native
-    } else {
-      this.setState({
-        warningMessage: "You must provide a username and password"
-      })
-    }
-
-  }
-
   logout(e) {
     console.log("Calling log out");
+    logoutUser();
     this.props.setLoggedIn(false, "");
   }
 
@@ -111,7 +71,7 @@ class Nav extends Component {
       fetch('http://localhost:8000/sign-up', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json, text/plain, */*',
+          'Accept': 'application/json, text/plain, *',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(jsonData)
@@ -215,6 +175,16 @@ class Nav extends Component {
   }
 }
 
+*/
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+    isFetching: state.isFetching,
+    id_token: state.id_token,
+    access_token: state.access_token
+  }
+}
+
 const modalStyle = {
   content : {
     top                   : '50%',
@@ -228,4 +198,4 @@ const modalStyle = {
   }
 };
 
-export default Nav;
+export default connect(mapStateToProps)(Nav);

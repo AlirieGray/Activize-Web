@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import AppRouter from './routers/AppRouter';
+import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { addEvent } from './actions/events';
 import ConfigureStore from './store/ConfigureStore';
