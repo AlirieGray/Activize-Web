@@ -29,24 +29,11 @@ export const requestLogin = (creds) => ({
 
 export const receiveLogin = (user) => ({
   type: 'LOGIN_SUCCESS',
-  payload: {
-    isFetching: false,
-    isAuthenticated: true,
-    id_token: user.id_token,
-    access_token: user.access_token
-  }
-  // isFetching: false,
-  // isAuthenticated: true,
-  // id_token: user.id_token,
-  // access_token: user.access_token
+  isFetching: false,
+  isAuthenticated: true,
+  id_token: user.id_token,
+  access_token: user.access_token
 })
-
-// export const receiveLogin = (user) => {
-//   return {
-//     type: 'LOGIN_SUCCESS',
-//     payload: true
-//   }
-// }
 
 export const loginError = (message) => ({
   type: 'LOGIN_FAILURE',
