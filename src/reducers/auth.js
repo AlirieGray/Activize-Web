@@ -4,37 +4,36 @@
 // in local storage.
 // TODO: check if token is expired
 
-export default (state = {
+const authDefaultState = {
   isFetching: false,
   isAuthenticated: localStorage.getItem('access_token') ? true: false
-  }, action) {
+}
+
+export default (state = authDefaultState, action) => {
   switch(action.type) {
     case 'LOGIN_REQUEST':
       return {
-        ...state,
         isFetching: false,
         isAuthenticated: true,
         errorMessage: '',
       }
     case 'LOGIN_SUCCESS':
       return {
-        ...state,
         isFetching: false,
         isAuthenticated: true,
         errorMessage: ''
       }
     case 'LOGIN_FAILURE':
       return {
-        ...state,
         isFetching: false,
         isAuthenticated: false,
         errorMessage: action.message
       }
     case 'LOGOUT_SUCCESS':
       return {
-        ...state,
         isFetching: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        errorMessage: ''
       }
     default:
       return state

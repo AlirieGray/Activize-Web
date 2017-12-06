@@ -7,6 +7,7 @@ import { addEvent } from './actions/events';
 import ConfigureStore from './store/ConfigureStore';
 
 const store = ConfigureStore();
+
 // TODO: use json
 store.dispatch(addEvent({name:"Free the Nipple"} ));
 store.dispatch(addEvent({name:"No Borders No Violence"} ));

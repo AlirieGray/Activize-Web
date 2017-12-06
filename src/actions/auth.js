@@ -21,7 +21,7 @@ export const signUpError = (message) => ({
 })
 
 export const requestLogin = (creds) => ({
-  type: 'REQUEST_LOGIN',
+  type: 'LOGIN_REQUEST',
   isFetching: true,
   isAuthenticated: false,
   creds
@@ -65,15 +65,14 @@ export function loginUser(creds) {
   }
 
   return dispatch => {
-    console.log('about to request login')
     dispatch(requestLogin(creds));
-    console.log('set request login')
+    console.log('sent request login dispatch')
 
     return fetch('http://localhost:8000/login', config).then((res) => {
       console.log(res)
       if (res.status != 200) {
         dispatch(loginError(res.statusText));
-        return Promise.reject();
+        return Promise.reject("Could not login");
       }
       return res.json();
     }).then((json) => {
@@ -83,8 +82,7 @@ export function loginUser(creds) {
         localStorage.setItem('access_token', json.access_token);
         console.log(localStorage.getItem('id_token'))
         console.log('sending receive login dispatch')
-        console.log(dispatch(receiveLogin({id_token: json.id_token, access_token: json.access_token})));
-
+        dispatch(receiveLogin({id_token: json.id_token, access_token: json.access_token}));
     }).catch(err => console.log("Error: " + err));
   }
 

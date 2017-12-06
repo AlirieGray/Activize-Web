@@ -7,6 +7,7 @@ import './nav.css';
 // in progress: new method w/ no Modal for now
 class Nav extends Component {
   render() {
+    console.log(this.props);
     return (
       <div>
       <header>

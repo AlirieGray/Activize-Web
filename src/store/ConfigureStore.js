@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import eventsReducer from '../reducers/events';
 import filtersReducer from '../reducers/filters';
-import authReducer from '../reducers/filters';
+import authReducer from '../reducers/auth';
 
 let createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 

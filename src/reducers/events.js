@@ -1,3 +1,4 @@
+
 const eventsReducerDefaultState = [];
 
 export default (state = eventsReducerDefaultState, action) => {
