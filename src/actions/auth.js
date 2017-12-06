@@ -70,19 +70,21 @@ export function loginUser(creds) {
     console.log('set request login')
 
     return fetch('http://localhost:8000/login', config).then((res) => {
-      return res.json()
+      console.log(res)
+      if (res.status != 200) {
+        dispatch(loginError(res.statusText));
+        return Promise.reject();
+      }
+      return res.json();
     }).then((json) => {
-      console.log(json);
-      if (json.status != 200) {
-        dispatch(loginError(json.message));
-        return Promise.reject({id_token: json.id_token, access_token: json.access_token});
-      } else {
+        console.log(json);
         console.log("logged in!")
         localStorage.setItem('id_token', json.id_token);
         localStorage.setItem('access_token', json.access_token);
+        console.log(localStorage.getItem('id_token'))
+        console.log('sending receive login dispatch')
+        console.log(dispatch(receiveLogin({id_token: json.id_token, access_token: json.access_token})));
 
-        dispatch(receiveLogin(json.user));
-      }
     }).catch(err => console.log("Error: " + err));
   }
 
