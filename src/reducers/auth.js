@@ -6,7 +6,7 @@
 
 const authDefaultState = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem('access_token') ? true: false
+  isAuthenticated: false
 }
 
 export default (state = authDefaultState, action) => {
@@ -18,6 +18,17 @@ export default (state = authDefaultState, action) => {
         errorMessage: ''
       }
     case 'LOGIN_SUCCESS':
+      // return {
+      //   isFetching: false,
+      //   isAuthenticated: true,
+      //   errorMessage: ''
+      // }
+      console.log(`in the reducer, the isAuthenticated is ${action.payload.isAuthenticated}`)
+      // return ({
+      //   isFetching: false,
+      //   isAuthenticated: true,
+      //   errorMessage: ''
+      // })
       return {
         isFetching: false,
         isAuthenticated: true,

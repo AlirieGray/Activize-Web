@@ -7,6 +7,8 @@ import './nav.css';
 // in progress: new method w/ no Modal for now
 class Nav extends Component {
   render() {
+    // console.log(this.props.isAuthenticated);
+    console.log(`the authenticated  is: ${this.props.auth.isAuthenticated}`)
     return (
       <div>
       <header>
@@ -19,10 +21,10 @@ class Nav extends Component {
             </div>
           </div>
           <div className='links' style={{paddingTop:10}}>
-            {!this.props.isAuthenticated && <a href="/login"> Log In </a>}
-            {!this.props.isAuthenticated && <a href="/signup"> Sign Up </a>}
-            {this.props.isAuthenticated && <button> Create Event </button>}
-            {this.props.isAuthenticated && <button> Logout </button>}
+            {!this.props.auth.isAuthenticated && <a href="/login"> Log In </a>}
+            {!this.props.auth.isAuthenticated && <a href="/signup"> Sign Up </a>}
+            {this.props.auth.isAuthenticated && <button> Create Event </button>}
+            {this.props.auth.isAuthenticated && <button> Logout </button>}
           </div>
         </div>
       </header>
@@ -190,11 +192,14 @@ const modalStyle = {
 
 
 const mapStateToProps = (state) => {
+  // return {
+  //   isAuthenticated: state.isAuthenticated,
+  //   isFetching: state.isFetching,
+  //   id_token: state.id_token,
+  //   access_token: state.access_token
+  // }
   return {
-    isAuthenticated: state.isAuthenticated,
-    isFetching: state.isFetching,
-    id_token: state.id_token,
-    access_token: state.access_token
+    auth: state.auth
   }
 }
 

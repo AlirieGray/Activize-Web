@@ -29,11 +29,24 @@ export const requestLogin = (creds) => ({
 
 export const receiveLogin = (user) => ({
   type: 'LOGIN_SUCCESS',
-  isFetching: false,
-  isAuthenticated: true,
-  id_token: user.id_token,
-  access_token: user.access_token
+  payload: {
+    isFetching: false,
+    isAuthenticated: true,
+    id_token: user.id_token,
+    access_token: user.access_token
+  }
+  // isFetching: false,
+  // isAuthenticated: true,
+  // id_token: user.id_token,
+  // access_token: user.access_token
 })
+
+// export const receiveLogin = (user) => {
+//   return {
+//     type: 'LOGIN_SUCCESS',
+//     payload: true
+//   }
+// }
 
 export const loginError = (message) => ({
   type: 'LOGIN_FAILURE',
@@ -82,10 +95,9 @@ export function loginUser(creds) {
         localStorage.setItem('access_token', json.access_token);
         console.log(localStorage.getItem('id_token'))
         console.log('sending receive login dispatch')
-        dispatch(receiveLogin({id_token: json.id_token, access_token: json.access_token}));
+        console.log(dispatch(receiveLogin({id_token: json.id_token, access_token: json.access_token})));
     }).catch(err => console.log("Error: " + err));
   }
-
 }
 
 export function logoutUser () {
