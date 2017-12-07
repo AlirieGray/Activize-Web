@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 //import Modal from 'react-modal';
-//import {loginUser, logoutUser} from '../../actions/auth';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import * as Actions from '../../actions/auth';
 import './nav.css';
 
 // in progress: new method w/ no Modal for now
@@ -24,7 +25,10 @@ class Nav extends Component {
             {!this.props.auth.isAuthenticated && <a href="/login"> Log In </a>}
             {!this.props.auth.isAuthenticated && <a href="/signup"> Sign Up </a>}
             {this.props.auth.isAuthenticated && <a href="/new-event"> Create Event </a>}
-            {this.props.auth.isAuthenticated && <button> Logout </button>}
+            {this.props.auth.isAuthenticated && <button onClick={
+              () => this.props.logoutUser() }>
+              Logout
+            </button>}
           </div>
         </div>
       </header>
@@ -192,15 +196,13 @@ const modalStyle = {
 
 
 const mapStateToProps = (state) => {
-  // return {
-  //   isAuthenticated: state.isAuthenticated,
-  //   isFetching: state.isFetching,
-  //   id_token: state.id_token,
-  //   access_token: state.access_token
-  // }
   return {
     auth: state.auth
   }
 }
 
-export default connect(mapStateToProps)(Nav);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
