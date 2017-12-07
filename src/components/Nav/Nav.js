@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
-import {loginUser, logoutUser} from '../../actions/auth';
+//import Modal from 'react-modal';
+//import {loginUser, logoutUser} from '../../actions/auth';
 import { connect } from 'react-redux';
 import './nav.css';
 
@@ -23,7 +23,7 @@ class Nav extends Component {
           <div className='links' style={{paddingTop:10}}>
             {!this.props.auth.isAuthenticated && <a href="/login"> Log In </a>}
             {!this.props.auth.isAuthenticated && <a href="/signup"> Sign Up </a>}
-            {this.props.auth.isAuthenticated && <button> Create Event </button>}
+            {this.props.auth.isAuthenticated && <a href="/new-event"> Create Event </a>}
             {this.props.auth.isAuthenticated && <button> Logout </button>}
           </div>
         </div>

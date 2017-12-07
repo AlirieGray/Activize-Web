@@ -3,8 +3,17 @@ const eventsReducerDefaultState = [];
 
 export default (state = eventsReducerDefaultState, action) => {
   switch (action.type) {
-    case 'ADD_EVENT':
-      return [...state, action.event];
+    case 'REQUEST_GET_EVENTS':
+      return [...state]
+    case 'GET_EVENTS_SUCCESS':
+      return action.events
+    case 'GET_EVENTS_FAILURE':
+      return {
+        isFetching: false,
+        errorMessage: action.message
+      }
+    case 'ADD_EVENT_SUCCESS':
+      return [...state, {id: action.id, date: action.date, name: action.name, loc: action.loc}];
     case 'REMOVE_EVENT':
       return state.filter(({ id }) => id !== action.id);
     case 'EDIT_EVENT':

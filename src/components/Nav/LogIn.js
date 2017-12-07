@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-import { loginUser } from '../../actions/auth';
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions/auth';
@@ -50,7 +49,7 @@ updatePassword(e) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.isAuthenticated
+    auth: state.auth
   }
 }
 

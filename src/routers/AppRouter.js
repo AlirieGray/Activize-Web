@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { Redirect } from 'react-router';
+//import { Redirect } from 'react-router';
 import {
   BrowserRouter, Route, Switch
 } from 'react-router-dom';

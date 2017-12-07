@@ -13,7 +13,7 @@ export default (state = authDefaultState, action) => {
   switch(action.type) {
     case 'LOGIN_REQUEST':
       return {
-        isFetching: false,
+        isFetching: true,
         isAuthenticated: true,
         errorMessage: ''
       }
@@ -31,9 +31,9 @@ export default (state = authDefaultState, action) => {
       }
     case 'LOGOUT_SUCCESS':
       return {
-        isFetching: true,
+        isFetching: false,
         isAuthenticated: false,
-        errorMessage: ''
+        errorMessage: 'Could not logout'
       }
     case 'SIGNUP_FAILURE':
       return {
