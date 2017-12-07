@@ -15,7 +15,8 @@ class EventForm extends Component {
     this.state={
       name:"",
       date:"",
-      loc: "",
+      address: "",
+      placeId: "",
       placeSearch: "",
       organizers:[]
     }
@@ -36,16 +37,16 @@ class EventForm extends Component {
   }
 
   updateEventLoc(e) {
-    this.setState({placeSearch: e.target.value, loc: e.target.value});
+    this.setState({placeSearch: e.target.value, address: e.target.value});
   }
 
   handleSelectSuggest(suggest) {
     console.log(suggest);
-    this.setState({search: "", loc: suggest.formatted_address });
+    this.setState({placeSearch: "", address: suggest.formatted_address, placeId: suggest.place_id });
   }
 
   render() {
-    const {placeSearch, loc} = this.state;
+    const {placeSearch, address, placeId} = this.state;
     return (
       <div>
         <form className="formContainer">
@@ -53,6 +54,7 @@ class EventForm extends Component {
           <input name="name" type="text" value={this.state.name} onChange={this.updateEventName}/>
           <label htmlFor="date" > Date </label>
           <input name="date" type="text" value={this.state.date} onChange={this.updateEventDate} />
+          <label htmlFor="location" > Location </label>
           <ReactGoogleMapLoader
             params={{
               key: API_KEY,
@@ -63,11 +65,11 @@ class EventForm extends Component {
               <div>
                 <ReactGooglePlacesSuggest
                   autocompletionRequest={{input: placeSearch}}
-                  googleMaps = {googleMaps}
-                  onSelectSuggest = {this.handleSelectSuggest}
+                  googleMaps={googleMaps}
+                  onSelectSuggest={this.handleSelectSuggest}
                 >
                   <input
-                    type="text" value={loc} placeholder="Search for a location" onChange={this.updateEventLoc}
+                    type="text" value={address} placeholder="Search for a location" onChange={this.updateEventLoc}
                   />
                 </ReactGooglePlacesSuggest>
               </div>
@@ -77,7 +79,7 @@ class EventForm extends Component {
         </form>
         <button type="button" onClick={() => {
             console.log({name: this.state.name, loc:this.state.loc, date:this.state.date})
-            this.props.addEvent({name: this.state.name, loc:this.state.loc, date:this.state.date});
+            this.props.addEvent({name: this.state.name, loc:this.state.placeId, date:this.state.date});
           }}>
         Submit
         </button>
