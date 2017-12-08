@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions/events';
 
-
 class EventPage extends Component {
 
   componentWillMount() {
@@ -12,9 +11,12 @@ class EventPage extends Component {
   }
 
   render() {
+    console.log(this.props.currentEvent)
     return(
       <div>
-        <h1> Name </h1>
+        <h2> {this.props.currentEvent.name} </h2>
+        <p> {this.props.currentEvent.date} </p>
+        <p> {this.props.currentEvent.address} </p>
       </div>
     );
   }
