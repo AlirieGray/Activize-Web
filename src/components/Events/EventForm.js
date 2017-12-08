@@ -78,7 +78,6 @@ class EventForm extends Component {
           </ReactGoogleMapLoader>
         </form>
         <button type="button" onClick={() => {
-            console.log({name: this.state.name, loc:this.state.loc, date:this.state.date})
             this.props.addEvent({name: this.state.name, placeID:this.state.placeId, address:this.state.address, date:this.state.date});
           }}>
         Submit

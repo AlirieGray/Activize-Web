@@ -1,4 +1,4 @@
-
+import history from '../routers/history';
 // ADD_EVENT
 // TODO: google maps
 
@@ -18,13 +18,11 @@ export const requestAddEvent = (
     }
 });
 
-export const receiveAddEvent = (event) =>({
+export const receiveAddEvent = ({name, _id, date, address, placeId}) =>({
   type: 'ADD_EVENT_SUCCESS',
-  id: event.id,
-  date: event.date,
-  name: event.name,
-  address: event.address,
-  placeId: event.placeId
+  id: _id,
+  date, name,
+  address, placeId
 })
 
 export const addEventError = (message) => ({
@@ -105,9 +103,9 @@ export function addEvent(event) {
         return Promise.reject("Could not add event");
       }
       return res.json();
-    }).then((json) => {
-      console.log(json)
-      console.log(dispatch(receiveAddEvent({id:json.id, name:json.name, loc:json.loc, date:json.loc})))
+    }).then(({_id, name, date, address, placeId}) => {
+      console.log(dispatch(receiveAddEvent({_id, name, address, placeId, date})))
+      history.push(`/events/${_id}`);
     }).catch(err => console.log("Error: " + err));
   }
 

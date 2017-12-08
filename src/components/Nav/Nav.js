@@ -18,8 +18,8 @@ class Nav extends Component {
           <div className="left">
             <a style={{marginRight:10}} href="/"> <h1> Activize </h1> </a>
             <div className="links">
-              <a href="/about"> About </a>
-              <a href="/events"> Events </a>
+              <Link to="/about"> About </Link>
+              <Link to="/events"> Events </Link>
             </div>
           </div>
           <div className='links' style={{paddingTop:10}}>
