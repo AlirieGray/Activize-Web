@@ -9,7 +9,6 @@ export default (state = eventsReducerDefaultState, action) => {
       return action.events
     case 'GET_EVENTS_FAILURE':
       return {
-        isFetching: false,
         errorMessage: action.message
       }
     case 'ADD_EVENT_SUCCESS':

@@ -9,8 +9,7 @@ import './nav.css';
 // in progress: new method w/ no Modal for now
 class Nav extends Component {
   render() {
-    // console.log(this.props.isAuthenticated);
-    console.log(`the authenticated  is: ${this.props.auth.isAuthenticated}`)
+    // console.log(`the authenticated  is: ${this.props.auth.isAuthenticated}`)
     return (
       <div>
       <header>

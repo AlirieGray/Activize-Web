@@ -6,7 +6,7 @@ export const requestAddEvent = (
   {
     name = '',
     date=0,
-    loc=''
+    address='',
   } = {}) => (
     {
     type: 'ADD_EVENT',
@@ -14,7 +14,7 @@ export const requestAddEvent = (
     event: {
       name,
       date,
-      loc
+      address
     }
 });
 
@@ -58,6 +58,39 @@ export const getEventsError = (message) => ({
   type: 'GET_EVENTS_FAILURE',
   message
 })
+
+export const requestGetEventById = (id) => ({
+  type: 'REQUEST_GET_EVENT_BY_ID',
+})
+
+export const receiveGetEventById = (event) => ({
+  type: 'GET_EVENT_BY_ID_SUCCESS',
+  event
+})
+
+export function getEventById(id) {
+  console.log("fetching events from database...");
+  let config = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/x-www-form-urlencoded' }
+  }
+
+  return dispatch => {
+    console.log(dispatch(requestGetEvents()));
+
+    return fetch(`http://localhost:8000/events/${id}`, config).then((res) => {
+      if (res.status != 200) {
+        dispatch(getEventsError("Error: Could not fetch events from database: " + res.statusText));
+        return Promise.reject("Could not fetch events from database");
+      }
+      return res.json();
+    }).then((json) => {
+      console.log(dispatch(receiveGetEventById(json)));
+    }).catch(err => console.log("Error: " + err));
+  }
+}
 
 export function getEvents() {
   console.log("fetching events from database...");

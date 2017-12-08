@@ -5,6 +5,12 @@ import * as Actions from '../../actions/events';
 
 
 class EventPage extends Component {
+
+  componentWillMount() {
+    console.log(this.props.match.params.id)
+    this.props.getEventById(this.props.match.params.id);
+  }
+
   render() {
     return(
       <div>
@@ -19,7 +25,7 @@ class EventPage extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    events: state.events
+    currentEvent: state.currentEvent
   }
 }
 
