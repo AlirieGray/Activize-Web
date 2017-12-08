@@ -1,11 +1,11 @@
 import React from 'react';
 import './events.css';
 
-const EventCard = ({name, date, loc}) => (
+const EventCard = ({name, date, address}) => (
   <div className="eventCard">
     <h2> {name} </h2>
     <p> Date: {date} </p>
-    <p> {loc} </p>
+    <p> {address} </p>
   </div>
 );
 

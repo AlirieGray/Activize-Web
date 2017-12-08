@@ -23,7 +23,8 @@ export const receiveAddEvent = (event) =>({
   id: event.id,
   date: event.date,
   name: event.name,
-  loc: event.loc
+  address: event.address,
+  placeId: event.placeId
 })
 
 export const addEventError = (message) => ({
@@ -91,7 +92,7 @@ export function addEvent(event) {
     headers: {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `name=${event.name}&date=${event.date}&loc=${event.loc}`
+    body: `name=${event.name}&date=${event.date}&placeId=${event.placeId}&address=${event.address}`
   }
 
   return dispatch => {

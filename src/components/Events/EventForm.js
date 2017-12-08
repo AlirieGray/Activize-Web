@@ -46,7 +46,7 @@ class EventForm extends Component {
   }
 
   render() {
-    const {placeSearch, address, placeId} = this.state;
+    const {placeSearch, address} = this.state;
     return (
       <div>
         <form className="formContainer">
@@ -79,7 +79,7 @@ class EventForm extends Component {
         </form>
         <button type="button" onClick={() => {
             console.log({name: this.state.name, loc:this.state.loc, date:this.state.date})
-            this.props.addEvent({name: this.state.name, loc:this.state.placeId, date:this.state.date});
+            this.props.addEvent({name: this.state.name, placeID:this.state.placeId, address:this.state.address, date:this.state.date});
           }}>
         Submit
         </button>
