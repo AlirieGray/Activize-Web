@@ -1,3 +1,5 @@
+import history from '../routers/history';
+
 export const requestSignUp = (creds) => ({
   type: 'REQUEST_SIGNUP',
   isFetching: true,
@@ -83,6 +85,7 @@ export function loginUser(creds) {
         console.log(localStorage.getItem('id_token'))
         console.log('sending receive login dispatch')
         console.log(dispatch(receiveLogin({id_token: json.id_token, access_token: json.access_token})));
+        history.push('/');
     }).catch(err => console.log("Error: " + err));
   }
 }

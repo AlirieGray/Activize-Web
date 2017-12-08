@@ -1,8 +1,9 @@
 import React from 'react';
+import history from './history';
 import '../App.css';
 //import { Redirect } from 'react-router';
 import {
-  BrowserRouter, Route, Switch
+  Router, Route, Switch
 } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Nav from '../components/Nav/Nav';
@@ -14,7 +15,7 @@ import LogIn from '../components/Nav/LogIn'
 import SignUp from '../components/Nav/SignUp'
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
       <Nav />
       <Switch>
@@ -27,7 +28,7 @@ const AppRouter = () => (
         <Route path="/new-event" component={EventForm}/>
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;

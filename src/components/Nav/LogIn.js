@@ -40,7 +40,7 @@ updatePassword(e) {
           onClick={() => {
               this.props.loginUser({username: this.state.username, password: this.state.password});
           }}>
-          Submit
+          Log In
         </button>
       </div>
     );
