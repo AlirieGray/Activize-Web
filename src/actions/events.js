@@ -1,4 +1,5 @@
 import history from '../routers/history';
+import serverPath from '../paths';
 // ADD_EVENT
 // TODO: google maps
 
@@ -80,7 +81,7 @@ export function getEventById(id) {
   return dispatch => {
     console.log(dispatch(requestGetEvents()));
 
-    return fetch(`http://localhost:8000/events/${id}`, config).then((res) => {
+    return fetch(`${serverPath}/${id}`, config).then((res) => {
       if (res.status != 200) {
         dispatch(getEventsError("Error: Could not fetch events from database: " + res.statusText));
         return Promise.reject("Could not fetch events from database");
@@ -104,7 +105,7 @@ export function getEvents() {
   return dispatch => {
     console.log(dispatch(requestGetEvents()));
 
-    return fetch('http://localhost:8000/events', config).then((res) => {
+    return fetch(`${serverPath}/events`, config).then((res) => {
       if (res.status != 200) {
         dispatch(getEventsError("Error: Could not fetch events from database: " + res.statusText));
         return Promise.reject("Could not fetch events from database");
@@ -130,7 +131,7 @@ export function addEvent(event) {
     dispatch(requestAddEvent(event));
     console.log("requested add event")
 
-    return fetch('http://localhost:8000/events/new', config).then((res) => {
+    return fetch(`${serverPath}/events/new`, config).then((res) => {
       if (res.status != 200) {
         dispatch(addEventError(res.statusText));
         return Promise.reject("Could not add event");

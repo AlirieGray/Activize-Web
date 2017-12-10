@@ -1,4 +1,5 @@
 import history from '../routers/history';
+import serverPath from '../paths';
 
 export const requestSignUp = (creds) => ({
   type: 'REQUEST_SIGNUP',
@@ -70,7 +71,7 @@ export function loginUser(creds) {
     dispatch(requestLogin(creds));
     console.log('sent request login dispatch')
 
-    return fetch('http://localhost:8000/login', config).then((res) => {
+    return fetch(`${serverPath}/login`, config).then((res) => {
       console.log(res)
       if (res.status != 200) {
         dispatch(loginError(res.statusText));
