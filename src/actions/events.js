@@ -8,6 +8,7 @@ export const requestAddEvent = (
     name = '',
     date=0,
     address='',
+    placeId='',
   } = {}) => (
     {
     type: 'ADD_EVENT',
@@ -15,7 +16,8 @@ export const requestAddEvent = (
     event: {
       name,
       date,
-      address
+      address,
+      placeId
     }
 });
 
@@ -118,7 +120,11 @@ export function getEvents() {
 }
 
 export function addEvent(event) {
+  console.log(event);
   console.log("attempting to add event...")
+  console.log(event.placeId)
+  console.log(event.name)
+
   let config = {
     method: 'POST',
     headers: {

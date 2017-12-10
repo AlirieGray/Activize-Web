@@ -41,12 +41,13 @@ class EventForm extends Component {
   }
 
   handleSelectSuggest(suggest) {
-    console.log(suggest);
+    console.log(suggest.place_id);
     this.setState({placeSearch: "", address: suggest.formatted_address, placeId: suggest.place_id });
+    console.log(this.state.placeId)
   }
 
   render() {
-    const {placeSearch, address} = this.state;
+    const {placeSearch, address, placeId} = this.state;
     return (
       <div>
         <form className="formContainer">
@@ -78,7 +79,14 @@ class EventForm extends Component {
           </ReactGoogleMapLoader>
         </form>
         <button type="button" onClick={() => {
-            this.props.addEvent({name: this.state.name, placeID:this.state.placeId, address:this.state.address, date:this.state.date});
+            if (this.state.name && this.state.date && this.state.placeId) {
+              console.log("place id in button click" + this.state.placeId)
+              var newEvent = {name: this.state.name, placeId:this.state.placeId, address:this.state.address, date:this.state.date};
+              console.log(newEvent)
+              this.props.addEvent(newEvent);
+            } else {
+              console.log("Missing a required field!")
+            }
           }}>
         Submit
         </button>
