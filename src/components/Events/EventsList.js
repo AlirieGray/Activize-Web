@@ -14,6 +14,8 @@ class EventList extends Component {
   }
 
   render() {
+    console.log(this.props)
+    console.log(this.props.events)
     return(
       <div className="eventsContainer">
         {this.props.events.map(({name, date, address, _id, placeId}, index) => {

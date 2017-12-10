@@ -81,7 +81,7 @@ export function getEventById(id) {
   return dispatch => {
     console.log(dispatch(requestGetEvents()));
 
-    return fetch(`${serverPath}/${id}`, config).then((res) => {
+    return fetch(`${serverPath}/events/${id}`, config).then((res) => {
       if (res.status != 200) {
         dispatch(getEventsError("Error: Could not fetch events from database: " + res.statusText));
         return Promise.reject("Could not fetch events from database");
