@@ -17,6 +17,8 @@ class EventForm extends Component {
       date:"",
       address: "",
       placeId: "",
+      lat: 0,
+      lng: 0,
       placeSearch: "",
       description: "",
       organizers:[]
@@ -48,13 +50,12 @@ class EventForm extends Component {
   }
 
   handleSelectSuggest(suggest) {
-    console.log(suggest.place_id);
-    this.setState({placeSearch: "", address: suggest.formatted_address, placeId: suggest.place_id });
-    console.log(this.state.placeId)
+    console.log(suggest.geometry.location.lat());
+    console.log(suggest.geometry.location.lng());
+    this.setState({placeSearch: "", address: suggest.formatted_address, lat: suggest.geometry.location.lat(), lng: suggest.geometry.location.lng(), placeId: suggest.place_id });
   }
 
   render() {
-    const {placeSearch, address, placeId} = this.state;
     return (
       <div>
         <form className="formContainer">
@@ -90,7 +91,7 @@ class EventForm extends Component {
         <button type="button" onClick={() => {
             if (this.state.name && this.state.date && this.state.placeId) {
               console.log("place id in button click" + this.state.placeId)
-              var newEvent = {name: this.state.name, description: this.state.description, placeId:this.state.placeId, address:this.state.address, date:this.state.date};
+              var newEvent = {name: this.state.name, description: this.state.description, lat: this.state.lat, lng: this.state.lng, placeId:this.state.placeId, address:this.state.address, date:this.state.date};
               console.log(newEvent)
               this.props.addEvent(newEvent);
             } else {

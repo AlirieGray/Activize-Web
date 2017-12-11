@@ -11,7 +11,6 @@ class EventPage extends Component {
   }
 
   render() {
-    console.log(this.props.currentEvent)
     return(
       <div>
         <h2> {this.props.currentEvent.name} </h2>
