@@ -18,17 +18,24 @@ class EventForm extends Component {
       address: "",
       placeId: "",
       placeSearch: "",
+      description: "",
       organizers:[]
     }
     this.updateEventName = this.updateEventName.bind(this);
     this.updateEventDate = this.updateEventDate.bind(this);
     this.updateEventLoc = this.updateEventLoc.bind(this);
+    this.updateEventDescription = this.updateEventDescription.bind(this);
     this.handleSelectSuggest = this.handleSelectSuggest.bind(this);
   }
 
   updateEventName(e) {
     const text = e.target.value;
     this.setState({ name: text });
+  }
+
+  updateEventDescription(e) {
+    const text = e.target.value;
+    this.setState({ description: text });
   }
 
   updateEventDate(e) {
@@ -55,6 +62,8 @@ class EventForm extends Component {
           <input name="name" type="text" value={this.state.name} onChange={this.updateEventName}/>
           <label htmlFor="date" > Date </label>
           <input name="date" type="text" value={this.state.date} onChange={this.updateEventDate} />
+          <label htmlFor="description" > Description </label>
+          <input name="description" type="text" value={this.state.description} onChange={this.updateEventDescription}/>
           <label htmlFor="location" > Location </label>
           <ReactGoogleMapLoader
             params={{
@@ -81,7 +90,7 @@ class EventForm extends Component {
         <button type="button" onClick={() => {
             if (this.state.name && this.state.date && this.state.placeId) {
               console.log("place id in button click" + this.state.placeId)
-              var newEvent = {name: this.state.name, placeId:this.state.placeId, address:this.state.address, date:this.state.date};
+              var newEvent = {name: this.state.name, description: this.state.description, placeId:this.state.placeId, address:this.state.address, date:this.state.date};
               console.log(newEvent)
               this.props.addEvent(newEvent);
             } else {

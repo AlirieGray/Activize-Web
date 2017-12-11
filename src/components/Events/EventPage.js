@@ -17,6 +17,7 @@ class EventPage extends Component {
         <h2> {this.props.currentEvent.name} </h2>
         <p> {this.props.currentEvent.date} </p>
         <p> {this.props.currentEvent.address} </p>
+        <p> {this.props.currentEvent.description} </p>
       </div>
     );
   }

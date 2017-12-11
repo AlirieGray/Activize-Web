@@ -9,6 +9,7 @@ export const requestAddEvent = (
     date=0,
     address='',
     placeId='',
+    description=''
   } = {}) => (
     {
     type: 'ADD_EVENT',
@@ -17,15 +18,17 @@ export const requestAddEvent = (
       name,
       date,
       address,
-      placeId
+      placeId,
+      description
     }
 });
 
-export const receiveAddEvent = ({name, _id, date, address, placeId}) =>({
+export const receiveAddEvent = ({name, _id, date, address, placeId, description}) =>({
   type: 'ADD_EVENT_SUCCESS',
   id: _id,
   date, name,
-  address, placeId
+  address, placeId,
+  description
 })
 
 export const addEventError = (message) => ({
@@ -120,17 +123,14 @@ export function getEvents() {
 }
 
 export function addEvent(event) {
-  console.log(event);
   console.log("attempting to add event...")
-  console.log(event.placeId)
-  console.log(event.name)
 
   let config = {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `name=${event.name}&date=${event.date}&placeId=${event.placeId}&address=${event.address}`
+    body: `name=${event.name}&date=${event.date}&placeId=${event.placeId}&description=${event.description}&address=${event.address}`
   }
 
   return dispatch => {
@@ -143,8 +143,8 @@ export function addEvent(event) {
         return Promise.reject("Could not add event");
       }
       return res.json();
-    }).then(({_id, name, date, address, placeId}) => {
-      console.log(dispatch(receiveAddEvent({_id, name, address, placeId, date})))
+    }).then(({_id, name, date, address, placeId, description}) => {
+      console.log(dispatch(receiveAddEvent({_id, name, address, placeId, date, description})))
       history.push(`/events/${_id}`);
     }).catch(err => console.log("Error: " + err));
   }
