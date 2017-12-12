@@ -54,7 +54,7 @@ class EventForm extends Component {
     var splitAddress = suggest.formatted_address.split(',')
     var shortAddress = splitAddress.splice(0, 2)
     console.log(shortAddress)
-    console.log(suggest.geometry.location.lat());
+    console.log(suggest.geometry.location.lat()); // is a number
     console.log(suggest.geometry.location.lng());
     this.setState({placeSearch: "", address: shortAddress.join(','), lat: suggest.geometry.location.lat(), lng: suggest.geometry.location.lng(), placeId: suggest.place_id });
   }
@@ -95,7 +95,6 @@ class EventForm extends Component {
         </form>
         <button type="button" onClick={() => {
             if (this.state.name && this.state.date && this.state.placeId) {
-              console.log("place id in button click" + this.state.placeId)
               var newEvent = {name: this.state.name, description: this.state.description, lat: this.state.lat, lng: this.state.lng, placeId:this.state.placeId, address:this.state.address, date:this.state.date};
               console.log(newEvent)
               this.props.addEvent(newEvent);
