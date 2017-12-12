@@ -50,12 +50,17 @@ class EventForm extends Component {
   }
 
   handleSelectSuggest(suggest) {
+
+    var splitAddress = suggest.formatted_address.split(',')
+    var shortAddress = splitAddress.splice(0, 2)
+    console.log(shortAddress)
     console.log(suggest.geometry.location.lat());
     console.log(suggest.geometry.location.lng());
-    this.setState({placeSearch: "", address: suggest.formatted_address, lat: suggest.geometry.location.lat(), lng: suggest.geometry.location.lng(), placeId: suggest.place_id });
+    this.setState({placeSearch: "", address: shortAddress.join(','), lat: suggest.geometry.location.lat(), lng: suggest.geometry.location.lng(), placeId: suggest.place_id });
   }
 
   render() {
+    const {placeSearch, address, placeId} = this.state;
     return (
       <div>
         <form className="formContainer">
