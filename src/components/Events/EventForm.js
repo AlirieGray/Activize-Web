@@ -52,11 +52,11 @@ class EventForm extends Component {
   handleSelectSuggest(suggest) {
 
     var splitAddress = suggest.formatted_address.split(',')
-    var shortAddress = splitAddress.splice(0, 2)
+    var shortAddress = splitAddress.splice(0, 2).join(',');
     console.log(shortAddress)
     console.log(suggest.geometry.location.lat()); // is a number
     console.log(suggest.geometry.location.lng());
-    this.setState({placeSearch: "", address: shortAddress.join(','), lat: suggest.geometry.location.lat(), lng: suggest.geometry.location.lng(), placeId: suggest.place_id });
+    this.setState({placeSearch: "", address: shortAddress, lat: suggest.geometry.location.lat(), lng: suggest.geometry.location.lng(), placeId: suggest.place_id });
   }
 
   render() {
